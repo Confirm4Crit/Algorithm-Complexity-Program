@@ -84,7 +84,6 @@ int qsPartition(int *ourArray, int p, int r)
 }
 void InsertionSort(int *ourArray, int length)
 {
-	//int i, j, key, numLength = length;
 	int j;
 	int key;
 	int i;
@@ -98,10 +97,7 @@ void InsertionSort(int *ourArray, int length)
 			ourArray[i + 1] = ourArray[i];
 			i = i - 1;
 		}
-		//for (i = j - 1; (i >= 0) && (ourArray[i] < key); i--)   // Smaller values move up
-		//{
-		//	ourArray[i + 1] = ourArray[i];
-		//}
+
 		ourArray[i + 1] = key;    //Put key into its proper location
 	}
 
@@ -114,8 +110,7 @@ int main()
 	myfile.open("data.txt");
 
 	int a[5][1000];
-	//int b[1000];
-	//int temp[1000];
+
 	LARGE_INTEGER start, end, freq;;
 	for (int i = 0; i <= 4; i++)
 	{
@@ -139,26 +134,19 @@ int main()
 				b[k] = a[i][k];
 			}
 
-			//auto start_time = std::chrono::high_resolution_clock::now();
-
 			//SOURCE: http://www.cplusplus.com/forum/general/80867/
 			QueryPerformanceFrequency(&freq);
 			QueryPerformanceCounter(&start);
 			InsertionSort(b, n);
 			QueryPerformanceCounter(&end);
-			//auto end_time = std::chrono::high_resolution_clock::now();
-			//auto time = end_time - start_time;
 
-			//duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
 			myfile << i + 1 << ":" << (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart
 				<< " microSeconds" << std::endl;
 			average += (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart;
 			cout << "Insertion sort of " << (n + 1);
 			cout << " elements session " << (i + 1);
 			cout << " took: ";
-			//long long ms = chrono::duration_cast<std::chrono::microseconds>(time).count();
-			//cout << ms << endl;
-			//std::cout << "The resolution of this timer is: " << freq.QuadPart << " Hz." << std::endl;
+
 			cout << (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart
 				<< " microSeconds" << std::endl;
 			delete[] b;
@@ -174,7 +162,7 @@ int main()
 	{
 		myfile << n + 1 << " elements" << endl;
 		average = 0;
-		//cout << n << endl;
+
 		for (int i = 0; i <= 4; i++)
 		{
 			int* b = NULL;
@@ -184,15 +172,10 @@ int main()
 				b[k] = a[i][k];
 			}
 
-			//auto start = std::chrono::high_resolution_clock::now();
-
 			QueryPerformanceFrequency(&freq);
 			QueryPerformanceCounter(&start);
 			quickSort(b, 0, n);
 			QueryPerformanceCounter(&end);
-			//auto end = std::chrono::high_resolution_clock::now();
-			//a/uto elapsed = end - start;
-			//duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
 
 			cout << "QuickSort sort of " << (n + 1);
 			cout << " elements session " << (i + 1);
@@ -202,10 +185,7 @@ int main()
 			average += (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart;
 			myfile << i + 1 << ":" << (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart
 				<< " microSeconds" << std::endl;
-			//long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-			//float end = (float)End / CLOCKS_PER_SEC;
-			//cout << microseconds << endl;
-			//cout << clock() - Start << endl;
+
 			delete[] b;
 		}
 		myfile << "Average: " << average / 5 << endl;
@@ -218,7 +198,6 @@ int main()
 	{
 		myfile << n + 1 << " elements" << endl;
 		average = 0;
-		//cout << n << endl;
 
 		for (int i = 0; i <= 4; i++)
 		{
@@ -229,14 +208,10 @@ int main()
 				b[k] = a[i][k];
 			}
 
-			//auto start = std::chrono::high_resolution_clock::now();
 			QueryPerformanceFrequency(&freq);
 			QueryPerformanceCounter(&start);
 			mergeSort(b, 0, n);
 			QueryPerformanceCounter(&end);
-			//auto end = std::chrono::high_resolution_clock::now();
-			//a/uto elapsed = end - start;
-			//duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
 
 			cout << "MergeSort sort of " << (n + 1);
 			cout << " elements session " << (i + 1);
@@ -246,10 +221,7 @@ int main()
 			average += (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart;
 			myfile << i + 1 << ":" << (end.QuadPart - start.QuadPart) * 1000000 / freq.QuadPart
 				<< " microSeconds" << std::endl;
-			//long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-			//float end = (float)End / CLOCKS_PER_SEC;
-			//cout << microseconds << endl;
-			//cout << clock() - Start << endl;
+
 			delete[] b;
 		}
 		myfile << "Average: " << average / 5 << endl;
@@ -258,5 +230,4 @@ int main()
 	}
 	myfile << endl;
 	myfile.close();
-	
 }
